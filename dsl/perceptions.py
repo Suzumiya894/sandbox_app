@@ -10,6 +10,7 @@ import os
 import traceback
 
 from utils.convert import ImageConverter
+from utils.get_euler_angle import LIMO
 from cv_bridge import CvBridge
 
 URL = "http://47.101.169.122:8762/vision/detect_traffic_light_color"
@@ -17,6 +18,7 @@ IMG_PATH = "/home/agilex/sandbox_app/images/"
 
 img_cvt = ImageConverter()
 cv_bridge = CvBridge()
+limo = LIMO()
 
 # rospy.init_node("image_retriever", anonymous=True)
 
@@ -114,6 +116,15 @@ def scan_lifter():
 
 def is_lifter_exist():
     return LIFTER_QRCODE is not None
+
+def get_pitch_angle():
+    return limo.GetIMUPitchData()
+
+def get_yaw_angle():
+    return limo.GetIMUYawData()
+
+def get_roll_angle():
+    return limo.GetIMURollData()
 
 
 if __name__ == "__main__":
